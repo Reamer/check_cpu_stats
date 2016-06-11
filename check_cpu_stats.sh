@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/bash
 # ==============================================================================
 # CPU Utilization Statistics plugin for Nagios 
 #
@@ -162,8 +162,8 @@ done
 
 
 
-# List to Table for warning threshold (compatibility with 
-set +A TAB_WARNING_THRESHOLD `echo $LIST_WARNING_THRESHOLD | sed 's/,/ /g'`
+# List to Table for warning threshold
+TAB_WARNING_THRESHOLD=( `echo $LIST_WARNING_THRESHOLD | sed 's/,/ /g'` )
 if [ "${#TAB_WARNING_THRESHOLD[@]}" -ne "3" ]; then
   echo "ERROR : Bad count parameter in Warning Threshold"
   exit $STATE_WARNING
@@ -174,7 +174,7 @@ IOWAIT_WARNING_THRESHOLD=`echo ${TAB_WARNING_THRESHOLD[2]}`
 fi
 
 # List to Table for critical threshold
-set +A TAB_CRITICAL_THRESHOLD `echo $LIST_CRITICAL_THRESHOLD | sed 's/,/ /g'`
+TAB_CRITICAL_THRESHOLD=( `echo $LIST_CRITICAL_THRESHOLD | sed 's/,/ /g'` )
 if [ "${#TAB_CRITICAL_THRESHOLD[@]}" -ne "3" ]; then
   echo "ERROR : Bad count parameter in CRITICAL Threshold"
   exit $STATE_WARNING
